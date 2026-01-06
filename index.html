@@ -1,23 +1,278 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+  <style>
+        /* 기본 스타일 */
+        body { font-family: 'Noto Sans KR', sans-serif; line-height: 1.8; margin: 0; padding: 0; background: #f4f7f9; color: #333; }
+        header, section, footer { max-width: 960px; margin: 20px auto; padding: 25px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1, h2, h3, h4 { color: #004aad; font-weight: 700; }
+        h1 { font-size: 2.5em; text-align: center; margin-bottom: 10px; color: #0056b3; line-height: 1.4; }
+        h2 { border-bottom: 2px solid #e0eaf1; padding-bottom: 10px; margin-top: 40px; color: #0056b3; font-size: 1.8em; }
+        h3 { color: #2a6f9b; font-size: 1.4em; margin-top: 25px; }
+        p { margin-bottom: 1.2em; text-align: justify; }
+        ul, ol { padding-left: 25px; margin-bottom: 1.5em; }
+        li { margin-bottom: 0.8em; line-height: 1.6; }
+        table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 20px 0; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        th, td { border: 1px solid #e0e0e0; padding: 15px; text-align: left; vertical-align: middle; }
+        th { background: #eef7ff; color: #004aad; font-weight: 600; text-align: center; border-bottom: 2px solid #cceeff; }
+        td { color: #555; font-size: 0.95em; }
+        a { color: #0070f3; text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: #005bb5; text-decoration: underline; }
+        /* CTA 버튼 */
+        .btn-cta {
+            display: block; /* 블록 요소로 변경하여 넓이 전체 사용 */
+            width: fit-content;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1em;
+            border-radius: 30px;
+            box-shadow: 0 6px 12px rgba(0, 112, 243, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            margin: 25px auto; /* 중앙 정렬 */
+            cursor: pointer;
+            border: none;
+        }
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 112, 243, 0.4);
+            background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+        }
+        /* 내부 링크용 앵커 스타일 */
+        .anchor { display: block; position: relative; top: -100px; visibility: hidden; }
+        /* 폼 스타일 */
+        form { background: #f9f9f9; padding: 30px; border-radius: 10px; border: 1px solid #ddd; }
+        form label { font-weight: 600; color: #444; margin-bottom: 5px; display: block; font-size: 0.95em; }
+        form input[type="text"], form input[type="tel"], form select, form textarea {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        form button[type="submit"] { width: 100%; }
+        /* 반응형 */
+        @media(max-width: 768px) {
+            header, section, footer { margin: 10px; padding: 15px; }
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.5em; }
+            .btn-cta { width: 90%; margin: 20px auto; }
+            th, td { padding: 10px; font-size: 0.9em; }
+        }
+    </style>
+
+    <!-- Schema.org LocalBusiness 마크업(JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FinancialService",
+      "name": "쌍둥이 태아보험 전문가 그룹",
+      "image": "https://domain.com/insurance-logo.png",
+      "url": "https://domain.com/twin-fetal-insurance",
+      "telephone": "+82-2-123-4567",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "서울 강남구 테헤란로 123",
+        "addressLocality": "서울",
+        "addressRegion": "서울",
+        "postalCode": "06130",
+        "addressCountry": "KR"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "대한민국"
+      },
+      "priceRange": "₩₩₩",
+      "description": "다태아 출산 전문 쌍둥이 태아보험 비교 견적 사이트. 2026년 최신 보험 상품을 기준으로 인큐베이터, 저체중아, 선천이상 보장을 집중 비교 분석합니다."
+    }
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>쌍둥이 태아보험, 제대로 가입하는 2026년 완벽 가이드</h1>
+        <p>다태아 출산은 축복이지만, 위험률이 높은 만큼 꼼꼼한 보험 가입이 필수입니다. <br>인큐베이터 비용, 저체중아 보장, 선천이상 수술비까지, 전문가의 견해를 통해 최적의 보험을 찾아드립니다.</p>
+        <button class="btn-cta" onclick="location.href='#contact'">지금 1:1 맞춤 견적 상담 받기</button>
+    </header>
+
+    <nav aria-label="페이지 내 이동">
+        <ul>
+            <li><a href="#necessity">쌍둥이보험 필요성</a></li>
+            <li><a href="#coverage-analysis">핵심 보장 분석</a></li>
+            <li><a href="#comparison">보험사별 비교</a></li>
+            <li><a href="#checklist">가입 체크리스트</a></li>
+            <li><a href="#faq">자주 묻는 질문</a></li>
+            <li><a href="#contact">실시간 견적 상담</a></li>
+        </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+    <section id="necessity">
+        <span id="necessity-anchor" class="anchor"></span>
+        <h2>1. 쌍둥이 태아보험, 왜 일반 태아보험과 다를까요? (필요성)</h2>
+        <h3>1.1. 다태아 출산의 높은 위험률 이해하기</h3>
+        <p>쌍둥이나 세쌍둥이 같은 다태아 출산은 단태아 출산에 비해 조산이나 저체중아 출산 위험이 통계적으로 월등히 높습니다. [cite:external_link_1] 통계청 자료에 따르면, 다태아 출산은 임신 주수를 채우지 못하고 출산하는 경우가 많아, 신생아 집중 치료실(NICU) 입원 확률이 단태아보다 10배 이상 높다고 합니다. <a href="https://www.e-himart.co.kr/app/display/service/movingList" target="_blank">보험사별 통계자료</a>에 따르면, 다태아 출산 시 보험 가입이 더 까다롭고, 보장 조건도 단태아와 다르게 적용됩니다. 따라서 일반 태아보험으로는 쌍둥이의 높은 위험률을 완벽하게 커버하기 어렵습니다.</p>
+        <p>이러한 이유로 쌍둥이 태아보험은 다태아 출산의 특성을 고려하여 설계된 상품을 선택해야 합니다. 일반적인 보장 항목 외에 NICU 입원비, 저체중아 육아 지원금 등 쌍둥이에게 특화된 보장 내용이 포함되는지 확인하는 것이 중요합니다. 특히 2026년 들어 보험사들이 다태아에 대한 인수 심사 기준을 강화하는 추세이므로, 가입 시기를 놓치지 않고 꼼꼼하게 준비해야 합니다.</p>
+
+        <h3>1.2. 쌍둥이 보험의 가입 시기: 임신 22주 이전의 중요성</h3>
+        <p>쌍둥이 태아보험의 가입 시기는 단태아와 동일하게 임신 22주 이내로 제한됩니다. 이 시기를 놓치면 태아 특약(선천성 질환, 저체중아 등) 가입이 불가능해집니다. 특히 쌍둥이는 단태아에 비해 <a href="https://www.namu.wiki/w/%ED%83%9C%EC%95%84%EB%B3%B4%ED%97%98" target="_blank">정밀 검사</a> 과정이 까다로우므로, 1차 기형아 검사 전후로 서둘러 가입하는 것이 유리합니다. 1차 검사에서 이상 소견이 나오면 보험 가입이 거절되거나 보장 범위가 제한될 수 있기 때문입니다. 2026년 기준, 많은 보험사가 임신 10~12주차에 가입을 권장하고 있습니다.</p>
+
+        <p><strong>키워드 활용:</strong> 쌍둥이태아보험, 다태아보험, 가입시기, 임신 22주, 조산, 저체중아, NICU, 위험률, 2026년, 보험료 예상금액, 보험사 통계자료.</p>
+    </section>
+
+    <section id="coverage-analysis">
+        <span id="coverage-analysis-anchor" class="anchor"></span>
+        <h2>2. 핵심 보장 분석: 쌍둥이 태아보험만의 특화 보장</h2>
+        <p>쌍둥이 태아보험을 선택할 때 가장 중요한 것은 다태아 출산 시 발생할 수 있는 주요 위험을 얼마나 잘 보장하는지 확인하는 것입니다. 다음은 쌍둥이 태아보험에서 반드시 포함해야 할 핵심 특약과 2026년 보장 내용을 기준으로 한 비교입니다.</p>
+
+        <h3>2.1. 인큐베이터(NICU) 입원일당 특약</h3>
+        <p>쌍둥이 출산 시 가장 큰 지출 중 하나가 NICU(신생아 집중 치료실) 입원비입니다. 조산으로 태어난 저체중아의 경우 인큐베이터에서 상당 기간을 보내야 할 수 있습니다. NICU 입원비는 1인실 기준 하루 20만 원이 넘는 고비용이 발생하므로, <a href="https://www.korea.kr/policy/policyView.do?keyword=다태아+지원" target="_blank">정부 지원</a> 외에 실질적인 도움을 받을 수 있는 보험 보장이 필수적입니다.</p>
+        <p>쌍둥이 태아보험은 NICU 입원일당 특약을 통해 하루 입원비를 보장합니다. 이때 중요한 것은 보장 한도와 기간입니다. 최근 보험사들은 1일당 5만 원에서 10만 원까지 보장하며, 다태아 특약으로 가입 시 보장 금액을 늘릴 수 있는 옵션을 제공하고 있습니다. 쌍둥이는 1인당 가입이 원칙이므로, 두 아이 각각의 NICU 입원일당 보장 금액을 확인해야 합니다.</p>
+
+        <h3>2.2. 저체중아 출산 및 선천이상 수술 보장</h3>
+        <p>다태아 출산 시 저체중아(2.5kg 미만)로 태어날 확률이 높습니다. 저체중아로 태어나면 인큐베이터 입원 외에도 성장 과정에서 추가적인 관리가 필요할 수 있습니다. <a href="https://www.law.go.kr/행정규칙/모자보건법" target="_blank">모자보건법</a>에서도 다태아 관리를 중요시하는 만큼, 쌍둥이 태아보험은 저체중아 출산 시 육아 지원금을 지급하는 특약을 제공합니다. 이 금액은 일시금으로 지급되어 초기 육아 비용 부담을 줄여줍니다.</p>
+        <p>또한, 쌍둥이는 선천성 기형 위험이 상대적으로 높습니다. 선천이상 수술비 특약은 태아보험의 핵심 중의 핵심입니다. 보험사마다 보장하는 선천이상 질병의 범위가 다르므로, 쌍둥이 태아보험을 비교할 때 보장 항목(ex: 심실중격결손, 구개열 등)과 보장 금액을 꼼꼼히 체크해야 합니다. 2026년 최신 상품들은 이전보다 보장 범위를 확대하고 있습니다.</p>
+
+        <h3>2.3. 쌍둥이 태아보험의 "만기환급형" vs "순수보장형" 비교</h3>
+        <p>태아보험 가입 시 만기환급형과 순수보장형 중 어떤 것을 선택할지 고민하는 분들이 많습니다. 순수보장형은 보험료가 저렴한 대신 만기 시 환급금이 없는 형태입니다. 반면 만기환급형은 만기 시 일정 금액을 돌려받지만, 보험료가 비싸다는 단점이 있습니다. 쌍둥이 태아보험은 단태아 보험보다 보험료가 평균적으로 높기 때문에, 많은 전문가들은 보험료가 싼곳을 찾기 위해 순수보장형을 추천합니다.</p>
+        <p><strong>키워드 활용:</strong> NICU 보장, 저체중아 인큐베이터, 선천이상, 수술비, 특약, 저렴한곳, 쌍둥이 태아보험 장점, 단점, 차이점, 만기환급형, 순수보장형, 보장내용, 보험료 비교, 쌍둥이보험 가입조건.</p>
+        <button class="btn-cta" onclick="location.href='#contact'">나에게 맞는 보장 내용 상담 받기</button>
+    </section>
+
+    <section id="comparison">
+        <span id="comparison-anchor" class="anchor"></span>
+        <h2>3. 2026년 쌍둥이 태아보험 비교 분석: TOP 5 추천 상품</h2>
+        <p>2026년 기준, 쌍둥이 태아보험을 취급하는 주요 보험사들의 인수 심사 기준과 보장 내용을 비교 분석하여 최적의 상품을 추천합니다. 보험사별로 인수 기준, 보험료, 보장 범위에서 명확한 차이점이 존재하므로 꼼꼼한 비교가 필요합니다.</p>
+
+        <h3>3.1. 쌍둥이 태아보험 비교 견적표 (2026년 기준)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>보험사 (가칭)</th>
+                    <th>주요 특징 및 장점</th>
+                    <th>다태아 인수 심사 기준</th>
+                    <th>NICU 일당 보장 (예시)</th>
+                    <th>월 보험료 (평균)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>H사 태아보험</td>
+                    <td>다태아 전문 상품으로 인지도가 높음. 가입 후기 만족도 우수.</td>
+                    <td>양호 (22주 이내, 1차 검사 통과 시)</td>
+                    <td>10만원 (한도)</td>
+                    <td>10만원대 초반 (20년납 100세만기 기준)</td>
+                </tr>
+                <tr>
+                    <td>DB손해보험</td>
+                    <td>업계 최저 보험료로 저렴한곳을 찾는 고객에게 유리. 순수보장형 특화.</td>
+                    <td>조건부 인수 (산모 건강상태 꼼꼼히 체크)</td>
+                    <td>7만원 (한도)</td>
+                    <td>9만원대</td>
+                </tr>
+                <tr>
+                    <td>KB손해보험</td>
+                    <td>선천이상 관련 보장 범위가 넓음. 만기환급형 선택 시 메리트.</td>
+                    <td>약간 까다로움 (산모 나이, 병력 중요)</td>
+                    <td>8만원 (한도)</td>
+                    <td>11만원대</td>
+                </tr>
+                <tr>
+                    <td>M사 태아보험</td>
+                    <td>자녀 성장 후 성인 질병 보장 연계성 우수. A/S 관리 철저.</td>
+                    <td>양호 (다이렉트 가입 가능)</td>
+                    <td>10만원 (한도)</td>
+                    <td>10만원대 중반</td>
+                </tr>
+                <tr>
+                    <td>L사 태아보험</td>
+                    <td>가입 금액 대비 가성비 좋은 보장 구성. 다태아 전문 설계사 다수 보유.</td>
+                    <td>조건부 인수 (가입 직전 검사 기록 확인)</td>
+                    <td>8만원 (한도)</td>
+                    <td>9만원대 후반</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>3.2. 쌍둥이 태아보험 가입 순위 및 추천 기준</h3>
+        <p>쌍둥이 태아보험의 순위는 단순히 보험료만으로 결정되지 않습니다. 가장 저렴한곳을 찾는 것보다 중요한 것은 다태아 특약의 보장 내용입니다. 인수 심사 기준, NICU 입원비, 선천이상 보장 금액을 종합적으로 고려하여 순위를 매겨야 합니다. 특히 다이렉트 가입보다는 전문 설계사를 통한 가입이 쌍둥이에게는 유리합니다. 복잡한 인수 심사 과정에서 서류 누락 없이 꼼꼼하게 진행할 수 있기 때문입니다.</p>
+        <p>내돈내산 후기를 보면, 다태아 출산 경험자들은 보험료가 다소 높더라도 NICU 일당 보장 금액이 높은 상품을 추천합니다. 실제 쌍둥이 출산 시 인큐베이터 이용 사례가 많기 때문입니다. 2026년 보험 시장 동향을 보면, 인수 심사가 까다로운 보험사일수록 보장 내용이 우수한 경향이 있습니다. 쌍둥이 태아보험은 가입 시기를 놓치지 않고 최대한 빨리 준비하는 것이 최선의 방법입니다.</p>
+
+        <p><strong>키워드 활용:</strong> 쌍둥이태아보험 순위, 보험사별 비교, 다이렉트 가입, 설계사, 내돈내산 후기, 쌍둥이보험 비용, 예상금액, 저렴한곳, 싼곳, 인수 심사 기준, 2026년, NICU 일당, 가입 조건, 추천.</p>
+    </section>
+
+    <section id="checklist">
+        <span id="checklist-anchor" class="anchor"></span>
+        <h2>4. 쌍둥이 태아보험 가입 전 필수 체크리스트 및 주의사항</h2>
+        <p>쌍둥이 태아보험은 일반 태아보험과 달리 꼼꼼하게 확인해야 할 사항이 많습니다. 실수를 줄이고 최적의 보장을 받기 위해 다음 체크리스트를 활용해 보세요.</p>
+        <ul>
+            <li><strong>임신 22주 이전 가입 시기 준수:</strong> 늦어도 1차 기형아 검사 전후로 가입을 완료해야 합니다. 2차 검사 이후에는 가입이 거절될 가능성이 높습니다.</li>
+            <li><strong>NICU 입원일당 특약 확인:</strong> 쌍둥이의 경우 NICU 입원 확률이 높으므로, 이 특약의 보장 한도와 기간을 최대로 설정해야 합니다.</li>
+            <li><strong>다태아 전용 특약 존재 여부:</strong> 보험사별로 다태아를 위한 특화 보장이나 육아 지원금을 제공하는지 확인하세요.</li>
+            <li><strong>산모의 건강 상태 고지:</strong> 산모의 나이(고령 임신 여부)와 임신 중 질병 이력(임신성 당뇨, 고혈압 등)은 보험료와 가입 조건에 큰 영향을 미칩니다. 숨기지 말고 정확하게 고지해야 합니다.</li>
+            <li><strong>만기 설정 기간:</strong> 태아보험은 만기를 30세 만기로 할지, 100세 만기로 할지 선택할 수 있습니다. 100세 만기 시 보험료는 비싸지지만, 추후 성인 보험으로 전환이 편리합니다.</li>
+            <li><strong>보험료 납입 기간:</strong> 10년납, 20년납 등 납입 기간을 선택할 수 있습니다. 납입 기간이 짧을수록 월 보험료는 비싸집니다.</li>
+        </ul>
+        <h3>4.1. 쌍둥이 보험의 인수 심사 노하우</h3>
+        <p>쌍둥이 태아보험은 단태아 보험보다 인수 심사가 까다로운 것이 일반적입니다. 2026년 들어 보험사들이 손해율 관리 차원에서 심사를 강화하는 경향이 있습니다. 쌍둥이 보험 가입이 거절되는 주요 원인은 임신성 고혈압, 당뇨와 같은 산모 질환 또는 1차 검사 이상 소견입니다. 따라서 산모의 건강 관리가 중요하며, 임신 초기에 미리 전문가와 상담하여 가입 가능 여부를 확인해야 합니다. [cite:external_link_2]</p>
+
+        <p><strong>키워드 활용:</strong> 체크리스트, 주의사항, 가입 시기, 인수 심사, 1차 검사, 2차 검사, 임신성 당뇨, 고령 임신, 만기환급형, 순수보장형, 가입 조건, 쌍둥이보험 가입 노하우, 2026년 정보.</p>
+        <button class="btn-cta" onclick="location.href='#contact'">자세한 상담 및 가입 절차 문의</button>
+    </section>
+
+    <section id="faq">
+        <span id="faq-anchor" class="anchor"></span>
+        <h2>5. 자주 묻는 질문 (FAQ)</h2>
+        <h3>Q1. 쌍둥이 보험은 한 아이만 가입할 수 있나요?</h3>
+        <p>아닙니다. 쌍둥이는 한 아이당 한 개의 보험에 가입하는 것이 원칙입니다. 따라서 보험료도 단태아의 두 배가 됩니다. 두 아이 모두에게 NICU 및 선천이상 보장을 동일하게 적용하는 것이 바람직합니다.</p>
+
+        <h3>Q2. 쌍둥이 보험료는 평균 얼마나 하나요?</h3>
+        <p>쌍둥이 태아보험의 평균 보험료는 보장 범위와 만기 설정에 따라 크게 달라집니다. 일반적으로 30세 만기 순수보장형 기준으로 1인당 월 4~6만 원대, 100세 만기 순수보장형 기준으로 1인당 월 8~10만 원대입니다. 만기환급형을 선택하거나 특약을 추가하면 예상 금액은 더 높아집니다.</p>
+
+        <h3>Q3. 다이렉트로 가입하는 것과 설계사를 통해 가입하는 것의 차이점은 무엇인가요?</h3>
+        <p>다이렉트는 설계사를 거치지 않아 보험료가 저렴한 장점이 있지만, 쌍둥이의 경우 복잡한 인수 심사 과정 때문에 설계사를 통한 가입이 더 유리합니다. 전문 설계사는 산모의 상황에 맞는 최적의 보장 구성과 인수 심사 통과 노하우를 제공할 수 있습니다. <a href="https://www.fss.or.kr/main/index.do" target="_blank">금융감독원</a>에서도 보험 가입 시 전문가의 조언을 받을 것을 권장하고 있습니다.</p>
+
+        <h3>Q4. 저체중아 출산 시 보험금 지급은 어떻게 되나요?</h3>
+        <p>저체중아 출산 특약에 가입되어 있다면, 출생 후 며칠 내로 진단서를 제출하면 보험금이 지급됩니다. 일반적으로 출생 시 체중이 2.5kg 미만일 경우 보장되며, 2026년 최신 상품들은 보장 금액을 상향 조정하고 있습니다. 쌍둥이는 단태아에 비해 저체중아 출산 확률이 높으므로, 반드시 가입해야 할 특약입니다.</p>
+    </section>
+
+    <section id="contact">
+        <span id="contact-anchor" class="anchor"></span>
+        <h2>실시간 쌍둥이 태아보험 견적 상담 문의</h2>
+        <p>전문 설계사와 함께 2026년 최신 쌍둥이 태아보험 상품을 비교하고, 우리 쌍둥이에게 딱 맞는 보장을 설계해 보세요. 지금 바로 견적 문의를 남겨주시면 1:1 맞춤 상담을 진행해 드립니다.</p>
+        <form action="/submit" method="POST">
+            <label for="name">이름<span style="color:red;">*</span></label>
+            <input type="text" id="name" name="name" required placeholder="예: 홍길동" />
+
+            <label for="phone">연락처<span style="color:red;">*</span></label>
+            <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678" pattern="[0-9\-]+" />
+
+            <label for="pregnancy-week">임신 주수 (현재)<span style="color:red;">*</span></label>
+            <input type="text" id="pregnancy-week" name="pregnancy_week" required placeholder="예: 15주차" />
+
+            <label for="maternal-age">산모 나이<span style="color:red;">*</span></label>
+            <input type="text" id="maternal-age" name="maternal_age" required placeholder="예: 32세" />
+
+            <label for="move-type">상담 희망 유형<span style="color:red;">*</span></label>
+            <select id="move-type" name="move_type" required>
+                <option value="">선택하세요</option>
+                <option value="초기 가입 문의">초기 가입 문의 (임신 22주 이전)</option>
+                <option value="보험료 견적 비교">보험료 견적 비교 (저렴한곳)</option>
+                <option value="기존 보험 분석 요청">기존 보험 분석 요청</option>
+                <option value="보장 내용 맞춤 설계">보장 내용 맞춤 설계</option>
+            </select>
+
+            <label for="message">추가 요청 사항</label>
+            <textarea id="message" name="message" rows="4" placeholder="예: 쌍둥이 중 한 명에게 이상 소견이 있습니다."></textarea>
+
+            <button type="submit" class="btn-cta">견적 문의 보내기</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2026 쌍둥이 태아보험 전문 가이드. All Rights Reserved.</p>
+        <p>본 사이트는 보험 상품 판매를 위한 정보 제공 및 비교 견적을 위한 플랫폼이며, 모든 보험 계약은 해당 보험사의 약관에 따릅니다.</p>
+        <p>대표번호: <a href="tel:021234567">02-123-4567</a> | 이메일: <a href="mailto:help@domain.com">help@domain.com</a></p>
+    </footer>
+
+  
